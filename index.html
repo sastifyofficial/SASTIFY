@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>SASTIFY — Smart Shopping & Social Networking</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #202124;
+    }
+    header {
+      background: white;
+      padding: 18px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 5px #00000012;
+    }
+    .logo { color: #1877f2; font-size: 27px; font-weight: 800; }
+    .hero {
+      text-align: center;
+      padding: 85px 20px 55px;
+    }
+    .hero h1 { font-size: 42px; margin-bottom: 15px; }
+    .hero h1 span { color: #1877f2; }
+    .hero p { color: #65676b; font-size: 17px; line-height: 1.7; }
+    .choices {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+    .choice {
+      background: white;
+      width: 310px;
+      padding: 35px 25px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 20px #0000000b;
+    }
+    .choice h2 { margin: 12px 0; }
+    .choice p { color: #65676b; line-height: 1.6; }
+    .choice button {
+      margin-top: 23px;
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 9px;
+      background: #1877f2;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 35px 15px;
+      color: #777;
+      font-size: 14px;
+    }
+    @media(max-width:600px) {
+      .hero h1 { font-size: 32px; }
+      header { padding: 16px 5%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">SASTIFY</div>
+    <div>Welcome</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Welcome to <span>SASTIFY</span></h1>
+      <p>Smart Shopping & Social Networking Platform<br>
+      Connect with people. Discover products. Shop smarter.</p>
+    </section>
+
+    <section class="choices">
+      <div class="choice">
+        <div style="font-size:42px">🌐</div>
+        <h2>SOCIAL</h2>
+        <p>Connect with people, share posts, photos and moments.</p>
+        <button onclick="alert('Social platform coming soon!')">Explore Social</button>
+      </div>
+
+      <div class="choice">
+        <div style="font-size:42px">🛍️</div>
+        <h2>SHOP</h2>
+        <p>Discover products, explore shopping and buy online.</p>
+        <button onclick="alert('Online shop coming soon!')">Explore Shop</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>SASTIFY</strong><br>
+    Smart Shopping & Social Networking Platform<br><br>
+    © 2026 SASTIFY. All rights reserved.
+  </footer>
+</body>
+</html>
