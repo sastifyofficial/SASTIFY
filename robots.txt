@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sastify.pages.dev/sitemap.xml
