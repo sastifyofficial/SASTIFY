@@ -58,8 +58,10 @@ footer{padding:34px 20px;text-align:center;color:#727985;font-size:13px;line-hei
 </main>
 <footer><b>SASTIFY</b><br>Smart Shopping &amp; Social Networking Platform<br>Connect with people. Discover products. Shop smarter.<br><br>© 2026 SASTIFY. All rights reserved.</footer>
 <script>
+const SUPABASE_URL='https://eepluqdmtvsvhqxcvtll.supabase.co';const SUPABASE_KEY=String.fromCharCode(115,98,95,112,117,98,108,105,115,104,97,98,108,101,95,73,121,78,84,55,111,88,56,102,106,68,48,101,106,109,88,115,87,78,57,121,65,95,48,57,104,66,70,107,98,77);
 window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('hide'),850));
-document.getElementById('loginForm').addEventListener('submit',e=>{e.preventDefault();alert('Account login will be available after secure authentication is connected.')});
-document.getElementById('forgot').addEventListener('click',()=>alert('Password recovery will be available after account services are connected.'));
+const loginForm=document.getElementById('loginForm');const loginButton=loginForm.querySelector('button[type="submit"]');
+loginForm.addEventListener('submit',async e=>{e.preventDefault();loginButton.disabled=true;loginButton.textContent='Logging in…';try{const response=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY},body:JSON.stringify({email:document.getElementById('identity').value.trim(),password:document.getElementById('password').value})});const data=await response.json();if(!response.ok)throw new Error(data.msg||data.message||data.error_description||'Login failed. Check your email and password.');localStorage.setItem('sastify_session',JSON.stringify(data));alert('Login successful!');}catch(error){alert(error.message||'Network error. Please try again.');}finally{loginButton.disabled=false;loginButton.textContent='Log In';}});
+document.getElementById('forgot').addEventListener('click',async()=>{const email=document.getElementById('identity').value.trim();if(!email){alert('Please enter your email address first.');return;}try{const response=await fetch(SUPABASE_URL+'/auth/v1/recover',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY},body:JSON.stringify({email})});if(!response.ok)throw new Error('Could not send recovery email.');alert('If this email is registered, a password reset link has been sent.');}catch(error){alert(error.message||'Network error. Please try again.');}});
 </script>
 </body></html>
