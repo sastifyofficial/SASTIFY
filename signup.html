@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0866ff"><meta name="description" content="Create your SASTIFY account and join the community.">
+<link rel="canonical" href="https://sastify.pages.dev/signup.html"><title>Create account | SASTIFY</title>
+<style>
+:root{--blue:#0866ff;--ink:#17191c;--muted:#69717d;--line:#e3e7ed}*{box-sizing:border-box}body{margin:0;background:#f5f7fa;color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column}.nav{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 max(24px,calc((100% - 1080px)/2));justify-content:space-between}.brand{font-size:24px;font-weight:850;letter-spacing:-1px;color:var(--blue);text-decoration:none}.back{color:var(--blue);text-decoration:none;font-size:14px;font-weight:700}.main{width:min(480px,calc(100% - 32px));margin:38px auto;flex:1}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px;box-shadow:0 12px 35px #1720330b}.mark{width:46px;height:46px;border:2px solid var(--blue);border-radius:14px;display:grid;place-items:center;color:var(--blue);font-weight:900;font-size:25px;margin-bottom:20px}.card h1{font-size:28px;letter-spacing:-1px;margin:0 0 8px}.intro{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 24px}.field{margin:14px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input{width:100%;border:1px solid #d6dce4;border-radius:8px;padding:13px 12px;font:inherit;font-size:14px;outline:none}.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #0866ff16}.hint{font-size:11px;color:var(--muted);margin-top:6px}.check{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:#535b66;line-height:1.5;margin:18px 0}.check input{margin-top:2px;accent-color:var(--blue)}button{width:100%;border:0;border-radius:8px;background:var(--blue);color:white;padding:14px;font-size:15px;font-weight:750;cursor:pointer}button:hover{background:#0759dc}.notice{display:none;margin-top:15px;padding:12px;border-radius:8px;background:#fff7e8;color:#805500;font-size:13px;line-height:1.5}.signin{text-align:center;color:var(--muted);font-size:13px;margin:20px 0 0}.signin a{color:var(--blue);font-weight:700;text-decoration:none}footer{text-align:center;padding:22px;color:#7b828d;font-size:12px}@media(max-width:520px){.nav{height:64px;padding:0 18px}.main{margin:22px auto}.card{padding:23px 19px}.card h1{font-size:25px}}
+</style></head>
+<body>
+<header class="nav"><a class="brand" href="/">SASTIFY</a><a class="back" href="/">← Back to home</a></header>
+<main class="main"><section class="card"><div class="mark">S</div><h1>Create your account</h1><p class="intro">Join SASTIFY to connect with people and discover products. One account for Social and Shop.</p>
+<form id="signupForm">
+<div class="field"><label for="fullName">Full name</label><input id="fullName" name="fullName" autocomplete="name" placeholder="Your full name" required maxlength="80"></div>
+<div class="field"><label for="username">Username</label><input id="username" name="username" autocomplete="username" placeholder="Choose a unique username" pattern="[A-Za-z0-9_]{3,24}" required minlength="3" maxlength="24"><div class="hint">3–24 characters: letters, numbers and underscore only.</div></div>
+<div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+<div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+8801XXXXXXXXX" pattern="\\+?[0-9]{10,15}" required></div>
+<div class="field"><label for="password">Create password</label><input id="password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" required></div>
+<div class="field"><label for="confirmPassword">Confirm password</label><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Enter password again" minlength="8" required></div>
+<label class="check"><input type="checkbox" required><span>I agree to SASTIFY's Terms and Privacy Policy.</span></label>
+<button type="submit">Create account</button><div class="notice" id="notice" role="status">The registration page is ready, but secure account creation is not connected yet. Your details have not been sent or saved. The Supabase Auth connection is required before registration can work.</div>
+</form><p class="signin">Already have an account? <a href="/#login">Log in</a></p></section></main>
+<footer>© 2026 SASTIFY. All rights reserved.</footer>
+<script>
+document.getElementById('signupForm').addEventListener('submit',function(e){e.preventDefault();const p=document.getElementById('password').value,c=document.getElementById('confirmPassword').value;if(p!==c){document.getElementById('confirmPassword').setCustomValidity('Passwords do not match');document.getElementById('confirmPassword').reportValidity();return}document.getElementById('confirmPassword').setCustomValidity('');document.getElementById('notice').style.display='block';});
+document.getElementById('confirmPassword').addEventListener('input',function(){this.setCustomValidity('')});
+</script></body></html>
