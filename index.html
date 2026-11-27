@@ -1,109 +1,101 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <title>SASTIFY — Smart Shopping & Social Networking</title>
+  <meta name="description" content="SASTIFY — Smart Shopping & Social Networking Platform. Connect with people, discover products and shop smarter.">
+  <meta property="og:title" content="SASTIFY — Social & Shop">
+  <meta property="og:description" content="Connect with people. Discover products. Shop smarter.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://sastify.pages.dev/">
+  <title>SASTIFY | Smart Shopping & Social Networking Platform</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #202124;
-    }
-    header {
-      background: white;
-      padding: 18px 7%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 1px 5px #00000012;
-    }
-    .logo { color: #1877f2; font-size: 27px; font-weight: 800; }
-    .hero {
-      text-align: center;
-      padding: 85px 20px 55px;
-    }
-    .hero h1 { font-size: 42px; margin-bottom: 15px; }
-    .hero h1 span { color: #1877f2; }
-    .hero p { color: #65676b; font-size: 17px; line-height: 1.7; }
-    .choices {
-      display: flex;
-      gap: 22px;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 20px;
-    }
-    .choice {
-      background: white;
-      width: 310px;
-      padding: 35px 25px;
-      border-radius: 16px;
-      text-align: center;
-      box-shadow: 0 4px 20px #0000000b;
-    }
-    .choice h2 { margin: 12px 0; }
-    .choice p { color: #65676b; line-height: 1.6; }
-    .choice button {
-      margin-top: 23px;
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 9px;
-      background: #1877f2;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    footer {
-      text-align: center;
-      padding: 35px 15px;
-      color: #777;
-      font-size: 14px;
-    }
-    @media(max-width:600px) {
-      .hero h1 { font-size: 32px; }
-      header { padding: 16px 5%; }
-    }
+    :root{--blue:#1877f2;--ink:#172033;--muted:#687386;--line:#e8edf4;--bg:#f6f8fc;--white:#fff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif}
+    button,input{font:inherit}button{cursor:pointer}
+    .topbar{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(5%,calc((100% - 1180px)/2));position:sticky;top:0;z-index:20}
+    .brand{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:850;letter-spacing:-1px;color:var(--blue);text-decoration:none}
+    .brandmark{width:34px;height:34px;border:3px solid var(--blue);border-radius:10px 10px 10px 3px;display:grid;place-items:center;font-size:20px;line-height:1;transform:rotate(-3deg)}
+    .actions{display:flex;gap:10px}.btn{border:0;border-radius:10px;padding:11px 20px;font-weight:700}.primary{background:var(--blue);color:white}.secondary{background:#edf4ff;color:var(--blue)}
+    .wrap{max-width:1180px;margin:auto;padding:0 24px}
+    .hero{padding:76px 0 52px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#e5f0ff 0,transparent 65%)}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;background:#eaf2ff;color:var(--blue);padding:8px 13px;border-radius:99px;font-size:13px;font-weight:750}
+    h1{font-size:clamp(38px,6vw,66px);letter-spacing:-2.8px;line-height:1.08;margin:20px 0 16px}h1 span{color:var(--blue)}
+    .lead{max-width:660px;margin:0 auto;color:var(--muted);font-size:18px;line-height:1.75}
+    .hero-cta{display:flex;justify-content:center;gap:12px;margin-top:28px;flex-wrap:wrap}
+    .hero-cta .btn{padding:14px 24px}
+    .preview{max-width:900px;margin:50px auto 0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:0 22px 65px #19365e12;display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
+    .preview-card{border-radius:16px;padding:22px;min-height:190px;overflow:hidden;position:relative}
+    .social-preview{background:linear-gradient(135deg,#e9f2ff,#f6f9ff)}.shop-preview{background:linear-gradient(135deg,#fff2e8,#fff9f4)}
+    .preview-icon{font-size:34px}.preview-card h3{font-size:22px;margin:12px 0 6px}.preview-card p{color:var(--muted);margin:0;line-height:1.6;font-size:14px}
+    .section{padding:66px 0}.section-head{text-align:center;margin-bottom:28px}.section-head h2{font-size:clamp(27px,4vw,38px);margin:0 0 10px;letter-spacing:-1px}.section-head p{color:var(--muted);margin:0;line-height:1.6}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}.feature .ico{font-size:28px}.feature h3{margin:14px 0 8px}.feature p{color:var(--muted);line-height:1.65;margin:0;font-size:14px}
+    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.product{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden}.product-art{height:145px;display:grid;place-items:center;font-size:55px;background:linear-gradient(135deg,#edf3fc,#f8faff)}.product:nth-child(2) .product-art{background:linear-gradient(135deg,#fff0e7,#fff9f5)}.product:nth-child(3) .product-art{background:linear-gradient(135deg,#e9f7f0,#f7fcf9)}.product:nth-child(4) .product-art{background:linear-gradient(135deg,#f1edff,#faf9ff)}.product-info{padding:14px}.product-info b{display:block;margin-bottom:5px}.product-info small{color:var(--muted)}
+    .founder{margin:12px auto 60px;max-width:880px;padding:25px;background:#fff;border:1px solid var(--line);border-radius:18px;display:flex;align-items:center;gap:18px}.avatar{width:58px;height:58px;border-radius:50%;background:#eaf2ff;color:var(--blue);display:grid;place-items:center;font-weight:800;font-size:20px;flex-shrink:0}.founder small{color:var(--muted)}.founder h3{margin:4px 0}
+    .login-section{padding:66px 20px;background:#edf4ff}.loginbox{max-width:430px;margin:auto;background:#fff;padding:30px;border-radius:18px;box-shadow:0 12px 35px #15345b12}.loginbox h2{text-align:center;margin:0 0 8px}.loginbox>p{text-align:center;color:var(--muted);font-size:14px;margin:0 0 22px}.field{margin:13px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input{width:100%;padding:13px;border:1px solid #dce3ed;border-radius:10px;outline:none}.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1877f21a}.loginbox .btn{width:100%;padding:13px;margin-top:8px}.links{display:flex;justify-content:space-between;gap:12px;margin-top:17px;font-size:13px}.links button{border:0;background:none;color:var(--blue);font-weight:700;padding:0}
+    footer{text-align:center;padding:32px 16px;color:var(--muted);font-size:13px;line-height:1.9}footer b{color:var(--blue)}
+    .modal-backdrop{position:fixed;inset:0;background:#10182880;display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal-backdrop.show{display:flex}.modal{max-width:390px;width:100%;background:#fff;border-radius:20px;padding:28px;text-align:center;box-shadow:0 25px 80px #0003;animation:pop .35s ease}.modal .avatar{margin:0 auto 12px;width:68px;height:68px}@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+    .loader{position:fixed;inset:0;background:#fff;z-index:100;display:grid;place-items:center;transition:opacity .45s,visibility .45s}.loader.hide{opacity:0;visibility:hidden}.loader-inner{text-align:center;color:var(--blue);font-weight:850;font-size:30px;letter-spacing:-1px}.loader-mark{width:52px;height:52px;border:4px solid #dceaff;border-top-color:var(--blue);border-radius:15px;margin:0 auto 12px;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+    @media(max-width:760px){.topbar{height:66px;padding:0 16px}.brand{font-size:22px}.brandmark{width:30px;height:30px}.btn{padding:10px 14px}.wrap{padding:0 17px}.hero{padding:55px 0 38px}.preview{grid-template-columns:1fr;margin-top:34px}.preview-card{min-height:155px}.section{padding:48px 0}.features{grid-template-columns:1fr}.products{grid-template-columns:repeat(2,1fr)}.founder{margin:0 17px 45px;align-items:flex-start}.loginbox{padding:24px 20px}}
+    @media(max-width:380px){.actions{gap:6px}.actions .btn{padding:9px 11px;font-size:13px}h1{letter-spacing:-1.7px}.products{gap:10px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">SASTIFY</div>
-    <div>Welcome</div>
+  <div class="loader" id="loader"><div class="loader-inner"><div class="loader-mark"></div>SASTIFY</div></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="SASTIFY home"><span class="brandmark">S</span><span>SASTIFY</span></a>
+    <div class="actions"><button class="btn secondary" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">Sign Up</button><button class="btn primary" onclick="document.getElementById('login').scrollIntoView({behavior:'smooth'})">Log In</button></div>
   </header>
-
   <main>
     <section class="hero">
-      <h1>Welcome to <span>SASTIFY</span></h1>
-      <p>Smart Shopping & Social Networking Platform<br>
-      Connect with people. Discover products. Shop smarter.</p>
-    </section>
-
-    <section class="choices">
-      <div class="choice">
-        <div style="font-size:42px">🌐</div>
-        <h2>SOCIAL</h2>
-        <p>Connect with people, share posts, photos and moments.</p>
-        <button onclick="alert('Social platform coming soon!')">Explore Social</button>
-      </div>
-
-      <div class="choice">
-        <div style="font-size:42px">🛍️</div>
-        <h2>SHOP</h2>
-        <p>Discover products, explore shopping and buy online.</p>
-        <button onclick="alert('Online shop coming soon!')">Explore Shop</button>
+      <div class="wrap">
+        <span class="eyebrow">✦ One platform. Two experiences.</span>
+        <h1>Welcome to <span>SASTIFY</span></h1>
+        <p class="lead">Smart Shopping &amp; Social Networking Platform<br>Connect with people. Discover products. Shop smarter.</p>
+        <div class="hero-cta"><button class="btn primary" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">Get Started</button><button class="btn secondary" onclick="document.getElementById('discover').scrollIntoView({behavior:'smooth'})">Discover SASTIFY</button></div>
+        <div class="preview" id="discover">
+          <article class="preview-card social-preview"><div class="preview-icon">🌐</div><h3>Social</h3><p>Share your moments, photos and videos. Follow people and build your community.</p></article>
+          <article class="preview-card shop-preview"><div class="preview-icon">🛍️</div><h3>Shop</h3><p>Explore products, discover sellers and find the things you love.</p></article>
+        </div>
       </div>
     </section>
+    <section class="section"><div class="wrap">
+      <div class="section-head"><h2>Everything in one place</h2><p>Switch between connecting with people and discovering products.</p></div>
+      <div class="features">
+        <article class="feature"><div class="ico">📸</div><h3>Share your world</h3><p>Post updates, photos and videos, and stay connected with your community.</p></article>
+        <article class="feature"><div class="ico">🤝</div><h3>Discover people</h3><p>Find people, follow profiles and keep up with the moments that matter.</p></article>
+        <article class="feature"><div class="ico">🛒</div><h3>Explore the shop</h3><p>Browse products and discover sellers from one convenient place.</p></article>
+      </div>
+    </div></section>
+    <section class="section" style="padding-top:0"><div class="wrap">
+      <div class="section-head"><h2>A little preview of Shop</h2><p>Discover different kinds of products in one place.</p></div>
+      <div class="products">
+        <article class="product"><div class="product-art">🎧</div><div class="product-info"><b>Audio &amp; Gadgets</b><small>Explore technology</small></div></article>
+        <article class="product"><div class="product-art">👕</div><div class="product-info"><b>Fashion</b><small>Find your style</small></div></article>
+        <article class="product"><div class="product-art">⌚</div><div class="product-info"><b>Accessories</b><small>Everyday essentials</small></div></article>
+        <article class="product"><div class="product-art">🎒</div><div class="product-info"><b>Lifestyle</b><small>More to discover</small></div></article>
+      </div>
+    </div></section>
+    <section class="founder"><div class="avatar">MJ</div><div><small>FOUNDER &amp; OWNER</small><h3>Muhammad Jihad</h3><small>Building a place to connect, discover and grow.</small></div></section>
+    <section class="login-section" id="login"><div class="loginbox">
+      <h2>Welcome back</h2><p>Log in to your SASTIFY account</p>
+      <form id="loginForm"><div class="field"><label for="identity">Mobile number or username</label><input id="identity" autocomplete="username" placeholder="Enter mobile number or username" required></div>
+      <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Enter your password" required></div>
+      <button class="btn primary" type="submit">Log In</button></form>
+      <div class="links"><button type="button" id="forgot">Forgot Password?</button><button type="button" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">Create account</button></div>
+      <div id="signup"></div>
+    </div></section>
   </main>
-
-  <footer>
-    <strong>SASTIFY</strong><br>
-    Smart Shopping & Social Networking Platform<br><br>
-    © 2026 SASTIFY. All rights reserved.
-  </footer>
+  <footer><b>SASTIFY</b><br>Smart Shopping &amp; Social Networking Platform<br>Connect with people. Discover products. Shop smarter.<br><br>© 2026 SASTIFY. All rights reserved.</footer>
+  <div class="modal-backdrop" id="founderModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="avatar">MJ</div><small>MEET THE FOUNDER</small><h2 id="modalTitle">Muhammad Jihad</h2><p style="color:#687386;line-height:1.6;margin:10px 0 20px">Welcome to SASTIFY — a place for social connection and smarter shopping.</p><button class="btn primary" id="closeModal">Let's explore</button></div></div>
+  <script>
+    window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('hide'),650);if(!sessionStorage.getItem('sastifyFounderSeen'))setTimeout(()=>document.getElementById('founderModal').classList.add('show'),1400)});
+    document.getElementById('closeModal').addEventListener('click',()=>{document.getElementById('founderModal').classList.remove('show');sessionStorage.setItem('sastifyFounderSeen','1')});
+    document.getElementById('founderModal').addEventListener('click',e=>{if(e.target.id==='founderModal'){e.currentTarget.classList.remove('show');sessionStorage.setItem('sastifyFounderSeen','1')}});
+    document.getElementById('loginForm').addEventListener('submit',e=>{e.preventDefault();alert('SASTIFY account login is not connected yet. Account features are coming soon.')});
+    document.getElementById('forgot').addEventListener('click',()=>alert('Password recovery will be available when account services are connected.'));
+  </script>
 </body>
 </html>
