@@ -65,4 +65,25 @@ const loginForm=document.getElementById('loginForm');const loginButton=loginForm
 loginForm.addEventListener('submit',async e=>{e.preventDefault();loginButton.disabled=true;loginButton.textContent='Logging in…';try{const response=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY},body:JSON.stringify((()=>{const identity=document.getElementById('identity').value.trim();const isEmail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(identity);let phone=identity.replace(/[\s()-]/g,'');if(/^01[3-9]\d{8}$/.test(phone))phone='+88'+phone;else if(/^8801[3-9]\d{8}$/.test(phone))phone='+'+phone;return {...(isEmail?{email:identity}:{phone}),password:document.getElementById('password').value};})())});const data=await response.json();if(!response.ok)throw new Error(data.msg||data.message||data.error_description||'Login failed. Check your email and password.');localStorage.setItem('sastify_session',JSON.stringify(data));alert('Login successful!');}catch(error){alert(error.message||'Network error. Please try again.');}finally{loginButton.disabled=false;loginButton.textContent='Log In';}});
 document.getElementById('forgot').addEventListener('click',async()=>{const email=document.getElementById('identity').value.trim();if(!email){alert('Please enter your email address first.');return;}try{const response=await fetch(SUPABASE_URL+'/auth/v1/recover',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY},body:JSON.stringify({email})});if(!response.ok)throw new Error('Could not send recovery email.');alert('If this email is registered, a password reset link has been sent.');}catch(error){alert(error.message||'Network error. Please try again.');}});
 </script>
+
+<script>
+(async()=>{
+ const endpoint='https://eepluqdmtvsvhqxcvtll.supabase.co/rest/v1/rpc/get_published_welcome';
+ const key=String.fromCharCode(115,98,95,112,117,98,108,105,115,104,97,98,108,101,95,73,121,78,84,55,111,88,56,102,106,68,48,101,106,109,88,115,87,78,57,121,65,95,48,57,104,66,70,107,98,77);
+ try{
+  const response=await fetch(endpoint,{method:'POST',headers:{apikey:key,'Content-Type':'application/json'}});
+  if(!response.ok)return;
+  const data=await response.json();if(!data||typeof data!=='object')return;
+  document.querySelectorAll('[data-editable-text]').forEach(el=>{const v=data[el.dataset.editableText];if(typeof v==='string'){el.textContent=v;}});
+  document.querySelectorAll('img[data-editable-image]').forEach(el=>{const v=data[el.dataset.editableImage];if(typeof v==='string'&&/^https:\/\//i.test(v))el.src=v;});
+  if(typeof data['brand-mark']==='string'&&/^https:\/\//i.test(data['brand-mark'])){
+   const mark=document.querySelector('[data-editable-image="brand-mark"]');
+   if(mark){mark.textContent='';mark.style.backgroundImage='url("'+data['brand-mark'].replace(/["\\]/g,'')+'")';mark.style.backgroundSize='cover';mark.style.backgroundPosition='center';mark.style.border='0';}
+  }
+  const vis=data.visibility||{};
+  Object.entries(vis).forEach(([id,visible])=>{if(['shop-preview','experiences','about'].includes(id)){const el=document.getElementById(id);if(el)el.hidden=visible===false;}});
+  if(typeof data['brand-name']==='string'){document.title=data['brand-name']+' | Social & Shop';}
+ }catch(e){/* Keep the built-in welcome page if CMS is unavailable. */}
+})();
+</script>
 </body></html>
