@@ -13,7 +13,7 @@ on public.admin_access for select to authenticated
 using (user_id = (select auth.uid()));
 insert into public.admin_access (user_id, access_level)
 select id, 'owner' from auth.users
-where lower(email) = lower('mdjihadofficial00@gmail.com')
+where lower(email) = lower('muhammadjihadofficiaal@gmail.com')
 on conflict (user_id) do update set access_level = excluded.access_level;
 select aa.user_id, u.email, aa.access_level, aa.created_at
 from public.admin_access aa join auth.users u on u.id = aa.user_id;
