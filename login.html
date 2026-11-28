@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0866ff">
+<title>Log In | SASTIFY</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#f0f2f5;color:#1c1e21;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;display:flex;flex-direction:column}.nav{height:68px;background:#fff;border-bottom:1px solid #e2e5e9;display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,calc((100% - 1050px)/2))}.brand{font-size:26px;font-weight:850;letter-spacing:-1px;color:#0866ff;text-decoration:none}.home{color:#0866ff;text-decoration:none;font-size:14px;font-weight:700}.main{flex:1;display:grid;place-items:center;padding:36px 16px}.card{width:min(430px,100%);background:#fff;border:1px solid #e0e3e8;border-radius:14px;padding:32px;box-shadow:0 10px 30px #1720330b}.mark{width:48px;height:48px;border-radius:14px;background:#0866ff;color:#fff;display:grid;place-items:center;font-size:29px;font-weight:850;margin:0 auto 18px}.card h1{text-align:center;font-size:27px;letter-spacing:-.8px;margin:0 0 7px}.sub{text-align:center;color:#69717d;font-size:14px;margin:0 0 25px}.field{margin:16px 0}.field label{display:block;font-size:13px;font-weight:750;margin-bottom:7px}.field input{width:100%;height:47px;border:1px solid #d5dae2;border-radius:8px;padding:0 13px;font:inherit;font-size:14px;outline:none}.field input:focus{border-color:#0866ff;box-shadow:0 0 0 3px #0866ff18}.submit{width:100%;height:48px;border:0;border-radius:8px;background:#0866ff;color:#fff;font-size:15px;font-weight:750;cursor:pointer;margin-top:7px}.submit:disabled{opacity:.65;cursor:wait}.links{display:flex;justify-content:space-between;gap:12px;margin-top:18px}.links a,.links button{font-size:13px;color:#0866ff;text-decoration:none;font-weight:700;background:none;border:0;padding:0;cursor:pointer}.notice{display:none;margin-top:16px;padding:12px;border-radius:8px;background:#fff0ed;color:#a02a19;font-size:13px;line-height:1.5}.signup{text-align:center;color:#69717d;font-size:13px;margin:24px 0 0}.signup a{color:#0866ff;text-decoration:none;font-weight:750}footer{text-align:center;padding:20px;color:#7b828d;font-size:12px}@media(max-width:480px){.card{padding:27px 21px}.nav{height:62px}}
+</style>
+</head>
+<body>
+<header class="nav"><a class="brand" href="/">SASTIFY</a><a class="home" href="/">← Back to Home</a></header>
+<main class="main"><section class="card">
+<div class="mark">S</div><h1>Welcome back</h1><p class="sub">Log in to your SASTIFY account</p>
+<form id="loginForm">
+<div class="field"><label for="identity">Email address or mobile number</label><input id="identity" type="text" autocomplete="username" placeholder="Enter email or mobile number" required></div>
+<div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Enter your password" required></div>
+<button class="submit" id="submit" type="submit">Log In</button>
+</form>
+<div class="links"><button type="button" id="forgot">Forgot Password?</button><a href="/signup.html">Create account</a></div>
+<div class="notice" id="notice" role="alert"></div>
+<p class="signup">New to SASTIFY? <a href="/signup.html">Create an account</a></p>
+</section></main><footer>© 2026 SASTIFY. All rights reserved.</footer>
+<script>
+const U='https://eepluqdmtvsvhqxcvtll.supabase.co';
+const K=String.fromCharCode(115,98,95,112,117,98,108,105,115,104,97,98,108,101,95,73,121,78,84,55,111,88,56,102,106,68,48,101,106,109,88,115,87,78,57,121,65,95,48,57,104,66,70,107,98,77);
+const form=document.getElementById('loginForm'),btn=document.getElementById('submit'),notice=document.getElementById('notice');
+function message(t){notice.textContent=t;notice.style.display='block'}
+form.addEventListener('submit',async e=>{
+ e.preventDefault();notice.style.display='none';btn.disabled=true;btn.textContent='Logging in…';
+ try{
+  const identity=document.getElementById('identity').value.trim(),password=document.getElementById('password').value;
+  const email=/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(identity);
+  let phone=identity.replace(/[\\s()-]/g,'');
+  if(/^01[3-9]\\d{8}$/.test(phone))phone='+88'+phone;else if(/^8801[3-9]\\d{8}$/.test(phone))phone='+'+phone;
+  const payload=email?{email:identity,password}:{phone,password};
+  const r=await fetch(U+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json',apikey:K},body:JSON.stringify(payload)});
+  const d=await r.json();
+  if(!r.ok)throw new Error(d.msg||d.message||d.error_description||'Login failed. Please check your details and try again.');
+  localStorage.setItem('sastify_session',JSON.stringify(d));
+  location.href='/profile.html';
+ }catch(err){message(err.message||'Network error. Please try again.');}
+ finally{btn.disabled=false;btn.textContent='Log In';}
+});
+document.getElementById('forgot').addEventListener('click',async()=>{
+ const email=document.getElementById('identity').value.trim();
+ if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){message('Password reset-er jonno age email address din.');return}
+ try{const r=await fetch(U+'/auth/v1/recover',{method:'POST',headers:{'Content-Type':'application/json',apikey:K},body:JSON.stringify({email})});if(!r.ok)throw new Error('Could not send password reset email.');notice.style.background='#eaf7ee';notice.style.color='#176b35';message('If this email is registered, a password reset link has been sent.');}
+ catch(e){message(e.message||'Network error. Please try again.')}
+});
+</script>
+</body></html>
