@@ -76,6 +76,11 @@ document.getElementById('forgot').addEventListener('click',async()=>{const email
   const data=await response.json();if(!data||typeof data!=='object')return;
   document.querySelectorAll('[data-editable-text]').forEach(el=>{const v=data[el.dataset.editableText];if(typeof v==='string'&&v.trim().length){el.textContent=v;}});
   document.querySelectorAll('img[data-editable-image]').forEach(el=>{const v=data[el.dataset.editableImage];if(typeof v==='string'&&/^https:\/\//i.test(v))el.src=v;});
+  const validImageUrl=v=>typeof v==='string'&&/^https:\/\//i.test(v);
+  if(validImageUrl(data['loader-logo'])){const mark=document.querySelector('.loader-mark img');if(mark)mark.src=data['loader-logo'];}
+  if(validImageUrl(data['favicon-logo'])){document.querySelectorAll('link[rel="icon"],link[rel="shortcut icon"],link[rel="apple-touch-icon"]').forEach(link=>link.href=data['favicon-logo']);}
+  if(validImageUrl(data['site-logo'])){document.querySelectorAll('.nav .brand').forEach(brand=>{brand.innerHTML='';const img=document.createElement('img');img.src=data['site-logo'];img.alt='SASTIFY';img.style.cssText='display:block;max-height:42px;max-width:190px;object-fit:contain';brand.appendChild(img);});}
+
 
   const vis=data.visibility||{};
   Object.entries(vis).forEach(([id,visible])=>{if(['shop-preview','experiences','about'].includes(id)){const el=document.getElementById(id);if(el)el.hidden=visible===false;}});
