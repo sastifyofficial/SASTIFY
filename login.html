@@ -29,9 +29,9 @@ form.addEventListener('submit',async e=>{
  e.preventDefault();notice.style.display='none';btn.disabled=true;btn.textContent='Logging in…';
  try{
   const identity=document.getElementById('identity').value.trim(),password=document.getElementById('password').value;
-  const email=/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(identity);
-  let phone=identity.replace(/[\\s()-]/g,'');
-  if(/^01[3-9]\\d{8}$/.test(phone))phone='+88'+phone;else if(/^8801[3-9]\\d{8}$/.test(phone))phone='+'+phone;
+  const email=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(identity);
+  let phone=identity.replace(/[\s()-]/g,'');
+  if(/^01[3-9]\d{8}$/.test(phone))phone='+88'+phone;else if(/^8801[3-9]\d{8}$/.test(phone))phone='+'+phone;
   const payload=email?{email:identity,password}:{phone,password};
   const r=await fetch(U+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json',apikey:K},body:JSON.stringify(payload)});
   const d=await r.json();
@@ -43,7 +43,7 @@ form.addEventListener('submit',async e=>{
 });
 document.getElementById('forgot').addEventListener('click',async()=>{
  const email=document.getElementById('identity').value.trim();
- if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){message('Password reset-er jonno age email address din.');return}
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){message('Password reset-er jonno age email address din.');return}
  try{const r=await fetch(U+'/auth/v1/recover',{method:'POST',headers:{'Content-Type':'application/json',apikey:K},body:JSON.stringify({email})});if(!r.ok)throw new Error('Could not send password reset email.');notice.style.background='#eaf7ee';notice.style.color='#176b35';message('If this email is registered, a password reset link has been sent.');}
  catch(e){message(e.message||'Network error. Please try again.')}
 });
