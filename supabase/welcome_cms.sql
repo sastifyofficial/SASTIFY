@@ -55,3 +55,6 @@ create policy "Owner can delete SASTIFY site assets" on storage.objects
 for delete to authenticated using (
  bucket_id='site-assets' and exists(select 1 from public.admin_access aa where aa.user_id=auth.uid() and aa.access_level='owner')
 );
+
+-- Refresh Supabase REST schema cache after creating the CMS table.
+notify pgrst, 'reload schema';
