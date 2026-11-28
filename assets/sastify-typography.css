@@ -1,0 +1,7 @@
+/* SASTIFY system typography — Apple/iPhone-style system font stack */
+:root{--sastify-font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif}
+html,body,button,input,textarea,select,optgroup,option{font-family:var(--sastify-font)!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{font-feature-settings:"kern" 1,"liga" 1}
+h1,h2,h3,h4,h5,h6,.brand,.logo,.wordmark,[data-editable-text="brand-name"]{font-family:var(--sastify-font)!important;letter-spacing:-.035em}
+.brand,[data-editable-text="brand-name"]{font-weight:800!important;letter-spacing:-.045em!important}
+button,input,textarea,select{letter-spacing:normal}
